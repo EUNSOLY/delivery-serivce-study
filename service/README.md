@@ -89,5 +89,48 @@ test {
 }
 
 ```
+
+
+### API 공통 spec 
+- API 반환값의 동일한 Spec 설정을 위한 클래스로 아래와 같은 형태로 구성
+```json
+{
+  "result": {
+    "result_code": 200,
+    "result_message": "OK",
+    "result_description": "성공"
+  },
+  "body": {}
+}
+
+```
+
+- 실제 구성 코드
+```java
+// 최상위 루트
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Api<T> {
+    private Result result;
+
+    @Valid // 유효한지 검사
+    private T body;
+}
+
+// result
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class Result {
+    private Integer resultCode;
+
+    private String resultMessage;
+
+    private String resultDescription;
+}
+
+```
 ### 프로젝트 작업 중 발생한 이슈
-1. [이슈1.](https://soly-log.tistory.com/65)
+[이슈1. ](https://soly-log.tistory.com/65) <br/>
