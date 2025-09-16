@@ -26,7 +26,7 @@ repositories {
 }
 
 dependencies {
-    compileOnly 'org.projectlombok:lombok'
+    compileOnly 'org.projectlombok:l  ombok'
     annotationProcessor 'org.projectlombok:lombok'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     runtimeOnly 'com.mysql:mysql-connector-j'
@@ -36,4 +36,12 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+bootJar{
+    enabled= false
+}
+
+jar{
+    enabled = true
 }
