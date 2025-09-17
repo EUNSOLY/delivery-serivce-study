@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/account ")
+@RequestMapping("/api/account")
 public class AccountApiController {
     private final AccountRepository accountRepository;
 
@@ -27,6 +27,14 @@ public class AccountApiController {
                 .registeredAt(LocalDateTime.now())
                 .build()
                 ;
+        var str = "안녕하세요";
+        try{
+            Integer.parseInt(str);
+        }catch (Exception e){
+            throw new ApiException(ErrorCode.SERVER_ERROR,e,"사용자 Me 호출시 에러 발생");
+
+        }
+
         return Api.OK(response);
 
     }

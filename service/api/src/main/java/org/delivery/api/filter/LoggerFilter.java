@@ -15,9 +15,12 @@ import java.io.IOException;
 public class LoggerFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
         // 뒷단에서 받을 수 있도록 맵핑된 객체를 전달하는 형식으로 구성
         var req = new ContentCachingRequestWrapper((HttpServletRequest) request);
         var res = new ContentCachingResponseWrapper((HttpServletResponse) response);
+
+        log.info("INIT URI,{}", req.getRequestURL());
 
         // 실행 전 시점
         chain.doFilter(req,res);
