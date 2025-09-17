@@ -35,7 +35,17 @@ dependencies {
 
     implementation project(':db')
 
-    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.7.0'	//Swagger
+    //Swagger
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.7.0'
+    //Provides transitive vulnerable dependency maven:org.apache.commons:commons-lang3:3.17.0 CVE-2025-48924 5.3 Insufficient Information Results powered by Mend.io
+    //위의 경고문구가 발생하여 안전한 버전 명시
+    implementation 'org.apache.commons:commons-lang3:3.18.0'
+
+
+    // JWT
+    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
 }
 
