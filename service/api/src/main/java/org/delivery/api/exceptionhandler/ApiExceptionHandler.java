@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 @Slf4j
-@RestControllerAdvice(annotations = {RestController.class}, basePackageClasses = {})
+@RestControllerAdvice
 @Order(value = Integer.MIN_VALUE) // 최우선처리
 public class ApiExceptionHandler {
     @ExceptionHandler(value = ApiException.class)
-    public ResponseEntity<Api<Object>> apiException(
+    public ResponseEntity<Api<Object>> apiExceptions(
             ApiException apiException
     ) {
         log.error("", apiException);
