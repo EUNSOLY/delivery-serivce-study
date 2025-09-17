@@ -29,13 +29,5 @@ public class AccountApiController {
                 ;
         return Api.OK(response);
 
-//        var str = "안녕하세요";
-//        var age =0;
-//        try{
-//            Integer.parseInt(str);
-//
-//        }catch (Exception e){
-//            throw  new ApiException(ErrorCode.SERVER_ERROR,e,"사용자 ME 호출 시 에러 발생")
-//        }
     }
 }
