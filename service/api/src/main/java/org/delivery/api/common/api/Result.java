@@ -30,7 +30,7 @@ public class Result {
         return Result.builder()
                 .resultCode(errorCodeInterface.getErrorCode())
                 .resultMessage(errorCodeInterface.getDescription())
-                .resultDescription("성공")
+                .resultDescription("에러 발생")
                 .build();
     }
 
