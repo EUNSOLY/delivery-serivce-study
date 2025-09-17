@@ -4,6 +4,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.delivery.api.common.api.Api;
 import org.delivery.api.domain.user.business.UserBusiness;
+import org.delivery.api.domain.user.controller.model.UserLoginRequest;
 import org.delivery.api.domain.user.controller.model.UserRegisterRequest;
 import org.delivery.api.domain.user.controller.model.UserResponse;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,4 +27,14 @@ public class UserOpenApiController {
         var res = userBusiness.register(request.getBody());
         return Api.OK(res);
     };
+
+    // 로그인
+    @PostMapping("/login")
+    public Api<UserResponse> login(
+            @Valid
+            @RequestBody Api<UserLoginRequest> request
+    ){
+        var response = userBusiness.login(request.getBody());
+        return Api.OK(response);
+    }
 }

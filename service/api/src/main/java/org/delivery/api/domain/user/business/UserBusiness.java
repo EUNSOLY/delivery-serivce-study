@@ -6,6 +6,7 @@ import org.delivery.api.common.annotation.Business;
 import org.delivery.api.common.api.Api;
 import org.delivery.api.common.error.ErrorCode;
 import org.delivery.api.common.exception.ApiException;
+import org.delivery.api.domain.user.controller.model.UserLoginRequest;
 import org.delivery.api.domain.user.controller.model.UserRegisterRequest;
 import org.delivery.api.domain.user.controller.model.UserResponse;
 import org.delivery.api.domain.user.converter.UserConverter;
@@ -43,6 +44,25 @@ public class UserBusiness {
          *                 .map(userConverter::toResponse)
          *                 .orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT,"등록할 회원정보가 존재하지 않습니다."));
          */
+    }
+
+
+
+    /**
+     * 1. email, password를 가지고 유효한 사용자 있는지 체크
+     * 2. 확인이 된 user Entity로 로그인확인
+     * 3. token 생성
+     * 4. token response
+     * @param body
+     */
+    public UserResponse login(@Valid UserLoginRequest request) {
+        var userEntity = userService.login(request.getEmail(),request.getPassword());
+        // 사용자가 없으면 throw 발생 했음
+
+        // 사용자가 있을 때
+        // TODO 토큰 생성으로 변경하기
+        return userConverter.toResponse(userEntity);
+
     }
 }
 
