@@ -28,7 +28,7 @@ public class UserOrderEntity extends BaseEntity {
     @Column(length = 50, nullable = false)
     private UserOrderStatus status;
 
-@Column(precision = 11, scale = 4, nullable = false)
+    @Column(precision = 11, scale = 4, nullable = false)
     private BigDecimal amount;
 
     private LocalDateTime orderedAt;
