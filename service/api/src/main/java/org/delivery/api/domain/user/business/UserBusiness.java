@@ -6,6 +6,8 @@ import org.delivery.api.common.annotation.Business;
 import org.delivery.api.common.api.Api;
 import org.delivery.api.common.error.ErrorCode;
 import org.delivery.api.common.exception.ApiException;
+import org.delivery.api.domain.token.business.TokenBusiness;
+import org.delivery.api.domain.token.controller.model.TokenResponse;
 import org.delivery.api.domain.user.controller.model.UserLoginRequest;
 import org.delivery.api.domain.user.controller.model.UserRegisterRequest;
 import org.delivery.api.domain.user.controller.model.UserResponse;
@@ -21,6 +23,8 @@ public class UserBusiness {
     private final UserService userService;
 
     private final UserConverter userConverter;
+
+    private final TokenBusiness tokenBusiness;
 
 
     /**
@@ -46,8 +50,6 @@ public class UserBusiness {
          */
     }
 
-
-
     /**
      * 1. email, password를 가지고 유효한 사용자 있는지 체크
      * 2. 확인이 된 user Entity로 로그인확인
@@ -55,13 +57,12 @@ public class UserBusiness {
      * 4. token response
      * @param body
      */
-    public UserResponse login(@Valid UserLoginRequest request) {
+    public TokenResponse login(@Valid UserLoginRequest request) {
         var userEntity = userService.login(request.getEmail(),request.getPassword());
         // 사용자가 없으면 throw 발생 했음
 
         // 사용자가 있을 때
-        // TODO 토큰 생성으로 변경하기
-        return userConverter.toResponse(userEntity);
+        return tokenBusiness.issueToken(userEntity);
 
     }
 }

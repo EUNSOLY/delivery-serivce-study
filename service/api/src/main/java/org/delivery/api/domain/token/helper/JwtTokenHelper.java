@@ -5,11 +5,12 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
-import org.delivery.api.common.error.ErrorCode;
+import jakarta.annotation.PostConstruct;
 import org.delivery.api.common.error.TokenErrorCode;
 import org.delivery.api.common.exception.ApiException;
 import org.delivery.api.domain.token.ifs.TokenHelperInterface;
 import org.delivery.api.domain.token.model.TokenDto;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,7 @@ import java.util.Map;
 @Component
 public class JwtTokenHelper implements TokenHelperInterface {
 
+
     @Value("${token.secret.key}")
     private String secretKey;
 
@@ -31,7 +33,14 @@ public class JwtTokenHelper implements TokenHelperInterface {
     @Value("${token.refresh-token.plus-hour}")
     private Long refreshTokenPlusHour;
 
-
+    // 디버깅용 추가
+    @PostConstruct
+    public void init() {
+        System.out.println("=== JWT Token Helper 초기화 ===");
+        System.out.println("secretKey: " + secretKey);
+        System.out.println("accessTokenPlusHour: " + accessTokenPlusHour);
+        System.out.println("refreshTokenPlusHour: " + refreshTokenPlusHour);
+    }
     @Override
     public TokenDto issueAccessToken(Map<String, Object> data) {
 
