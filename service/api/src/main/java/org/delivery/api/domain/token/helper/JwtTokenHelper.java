@@ -117,6 +117,8 @@ public class JwtTokenHelper implements TokenHelperInterface {
 
         try{
             var result =  parser.parseClaimsJws(token);
+            System.out.println("<<<<<<<IIIII" + result +" 토큰 결과값");
+            System.out.println("<<<<<<<IIIII" + result.getBody() +" 토큰 결과값의 body");
 
             return new HashMap<String, Object>(result.getBody());
 

@@ -13,7 +13,10 @@ import org.delivery.api.domain.user.controller.model.UserRegisterRequest;
 import org.delivery.api.domain.user.controller.model.UserResponse;
 import org.delivery.api.domain.user.converter.UserConverter;
 import org.delivery.api.domain.user.service.UserService;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
+import java.util.Objects;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -63,6 +66,21 @@ public class UserBusiness {
 
         // 사용자가 있을 때
         return tokenBusiness.issueToken(userEntity);
+
+    }
+
+    public UserResponse me(Long userId) {
+        var userEntity = userService.getUserWithThrow(userId);
+        return userConverter.toResponse(userEntity);
+
+    }
+    public UserResponse me() {
+        // 동일한 결과 requestContext는 어디서든 사용 가능
+        var requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
+        var userId = requestContext.getAttribute("userId", RequestAttributes.SCOPE_REQUEST);
+
+        var userEntity = userService.getUserWithThrow(Long.parseLong(userId.toString()));
+        return userConverter.toResponse(userEntity);
 
     }
 }

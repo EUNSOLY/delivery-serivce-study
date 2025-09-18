@@ -38,4 +38,9 @@ public class TokenBusiness {
 
     }
 
+    // 내가 발생한 토큰이 맞는지 발리데이션
+    public Long validationAccessToken(String accessToken){
+        return tokenService.validationToken(accessToken);
+    }
+
 }

@@ -54,4 +54,12 @@ public class UserService {
                 .orElseThrow(() -> new ApiException(UserErrorCode.USER_NOT_FOUNDK, "유저가 존재하지 않습니다"));
 
     }
+
+    public UserEntity getUserWithThrow(Long userId) {
+        return userRepository.findFirstByIdAndStatusOrderByIdDesc(
+                        userId,
+                        UserStatus.REGISTERED
+                )
+                .orElseThrow(() -> new ApiException(UserErrorCode.USER_NOT_FOUNDK, "유저가 존재하지 않습니다"));
+    }
 }
