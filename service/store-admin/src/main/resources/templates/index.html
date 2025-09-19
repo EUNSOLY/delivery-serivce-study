@@ -13,6 +13,9 @@
 <body>
     <h1>Main PAGE</h1>
 
-    <h2 th:if="${#authentication != null}" th:text="${#authentication.name}"></h2>
+    <h2 th:if="${#authentication != null}" th:text="${#authentication.name}"></h2></br>
+    <h2 th:if="${#authentication != null}" th:text="${#authentication.principal.storeName}"></h2></br>
+    <h2 th:if="${#authentication != null}" th:text="${#authentication.principal.role}"></h2></br>
+    <h2 th:if="${#authentication != null}" th:text="${#authentication}"></h2></br>
 </body>
 </html>

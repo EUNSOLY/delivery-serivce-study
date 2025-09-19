@@ -21,8 +21,15 @@ public class StoreService {
     public StoreEntity getStoreByName (String name){
         var entity = storeRepesitory.findFirstByNameAndStatusOrderByIdDesc(name, StoreStatus.REGISTERED);
         return entity.orElseThrow(() -> new RuntimeException("등록된 스토어가 없습니다."));
-
     }
+
+    public StoreEntity getStoreWithThrow(Long id){
+        var entity = storeRepesitory.findFirstByIdAndStatusOrderByIdDesc(id, StoreStatus.REGISTERED);
+        return entity.orElseThrow(()-> new RuntimeException("유효한 스토어가 없습니다."));
+    }
+
+
+
 
 
 
