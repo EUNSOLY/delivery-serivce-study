@@ -8,6 +8,8 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.List;
@@ -35,7 +37,12 @@ public class SecurityConfig {
                 )
                 .formLogin(Customizer.withDefaults())
                 ;
-
         return httpSecurity.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        // hash 방식으로 암호화를 하고 salt(임의의 문자열(랜덤 데이터))를 추가
+        return  new BCryptPasswordEncoder();
     }
 }

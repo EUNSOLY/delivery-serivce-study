@@ -36,7 +36,6 @@ public class StoreService {
     }
 
     // 카테고리로 스토어 검색
-
     public List<StoreEntity> searchByCategory(StoreCategory category){
         var list = storeRepesitory.findAllByStatusAndCategoryOrderByStarDesc(
                 StoreStatus.REGISTERED,
