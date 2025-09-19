@@ -27,6 +27,13 @@ repositories {
 dependencies {
     //Security
     implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    //thymeleaf(템플릿엔진- view)
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+    //
+    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6:3.1.2.RELEASE")
+
     // Web
     implementation 'org.springframework.boot:spring-boot-starter-web'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
