@@ -1,0 +1,17 @@
+services:
+  rabbitmq:
+    container_name: rabbitmq
+    image: rabbitmq:latest
+    # Mangement 활성화 명령어 자동 실행
+    # (기본 명령어도 자동으로 덮어씌워버려서 기본 실행 명령어 rabbitmq-server도 추가)
+    # RabbitMQ 서버를 백그라운드에서 시작
+    command: >
+      bash -c "rabbitmq-plugins enable rabbitmq_management &&
+               rabbitmq-server"
+    ports:
+      - '${RABBITMQ_AMQP_PORT:-5672}:5672' #rabbitmq amqp port
+      - '${RABBITMQ_MANAGE_PORT:-15672}:15672' #manage port
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER} # 기본사용자
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_SECURE_PASSWORD} #기본 사용자 비밀번호
+
