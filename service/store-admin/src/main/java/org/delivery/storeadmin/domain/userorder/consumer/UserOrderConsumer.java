@@ -1,4 +1,4 @@
-package org.delivery.storeadmin.domain.userorder;
+package org.delivery.storeadmin.domain.userorder.consumer;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
