@@ -11,11 +11,19 @@
     <title>가맹점 사용자 임시 테스트</title>
 </head>
 <body>
-    <h1>Main PAGE</h1>
+<h1>Main PAGE</h1>
 
-    <h2 th:if="${#authentication != null}" th:text="${#authentication.name}"></h2></br>
-    <h2 th:if="${#authentication != null}" th:text="${#authentication.principal.storeName}"></h2></br>
-    <h2 th:if="${#authentication != null}" th:text="${#authentication.principal.role}"></h2></br>
-    <h2 th:if="${#authentication != null}" th:text="${#authentication}"></h2></br>
 </body>
+<script>
+    const url = "http://localhost:8081/api/sse/connect" // 접속 주소
+const eventSource = new EventSource(url); // sse 연결
+
+eventSource.onopen = event =>{
+console.log("sse connection");
+console.log(event);
+}
+eventSource.onmessage = event =>{
+console.log("receive data : " + event.data);
+}
+</script>
 </html>
