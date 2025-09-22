@@ -7,14 +7,13 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("")
 public class PageController {
-    @RequestMapping(path = {"","/main"})
+    @RequestMapping(path = {"", "/", "/main"})
     public ModelAndView view(){
-        return new ModelAndView("index");
+        return new ModelAndView("display");
     }
 
     @RequestMapping("/order")
     public ModelAndView order(){
         return new ModelAndView("order/order");
-
     }
 }

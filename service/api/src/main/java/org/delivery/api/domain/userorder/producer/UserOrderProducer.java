@@ -24,5 +24,7 @@ public class UserOrderProducer {
                 .build();
 
         producer.producer(EXCHANGE, ROUTE_KEY,message);
+
+
     }
 }

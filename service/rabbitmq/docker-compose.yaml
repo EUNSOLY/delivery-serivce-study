@@ -14,4 +14,6 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER} # 기본사용자
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_SECURE_PASSWORD} #기본 사용자 비밀번호
+      RABBITMQ_MANAGEMENT_RATES_MODE: basic  # 통계 기능 활성화
+
 

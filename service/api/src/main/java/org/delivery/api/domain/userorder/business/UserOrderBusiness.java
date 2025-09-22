@@ -52,7 +52,10 @@ public class UserOrderBusiness {
                 .map(storeMenuService::getStoreMenuWithThrow)
                 .toList();
 
-        var userOrderEntity = userOrderConverter.toEntity(user,storeMenuEntityList);
+        var userOrderEntity = userOrderConverter.toEntity(
+                user,
+                body.getStoreId(),
+                storeMenuEntityList);
 
         //주문
         var newUserOrderEntity = userOrderService.order(userOrderEntity);

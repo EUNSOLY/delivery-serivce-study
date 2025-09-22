@@ -17,12 +17,15 @@ public class SseConnectionPool implements ConnectionPoolIfs<String, UserSseConne
 
     @Override
     public void addSession(String uniqueKey, UserSseConnection userSseConnection) {
+        log.info("addSession uniqueKey {}", uniqueKey);
+        log.info("addSession userSseConnection {}", userSseConnection);
         connectionPool.put(uniqueKey,userSseConnection);
 
     }
 
     @Override
     public UserSseConnection getSession(String uniqueKey) {
+        log.info("getSession {}", uniqueKey);
         return  connectionPool.get(uniqueKey);
     }
 

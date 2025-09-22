@@ -1,12 +1,11 @@
-package org.delivery.storeadmin.domain.user.business;
+package org.delivery.storeadmin.domain.storeuser.business;
 
 import lombok.RequiredArgsConstructor;
-import org.delivery.storeadmin.common.annotation.Business;
 import org.delivery.storeadmin.domain.store.service.StoreService;
-import org.delivery.storeadmin.domain.user.controller.model.StoreUserRegisterRequest;
-import org.delivery.storeadmin.domain.user.controller.model.StoreUserResponse;
-import org.delivery.storeadmin.domain.user.converter.StoreUserConverter;
-import org.delivery.storeadmin.domain.user.service.StoreUserService;
+import org.delivery.storeadmin.domain.storeuser.controller.model.StoreUserRegisterRequest;
+import org.delivery.storeadmin.domain.storeuser.controller.model.StoreUserResponse;
+import org.delivery.storeadmin.domain.storeuser.converter.StoreUserConverter;
+import org.delivery.storeadmin.domain.storeuser.service.StoreUserService;
 import org.springframework.stereotype.Service;
 
 @Service
