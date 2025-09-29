@@ -2,6 +2,10 @@ plugins {
     id 'java'
     id 'org.springframework.boot'
     id 'io.spring.dependency-management'
+    // 코틀린
+    id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.kotlin.plugin.spring'
+    id 'org.jetbrains.kotlin.plugin.jpa'
 }
 
 group = 'org.delivery'
@@ -51,7 +55,28 @@ dependencies {
     runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
     runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
 
+    // Kotlin
+    implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
+
 }
+// Kotlin 컴파일러 옵션 설정 [Java의 @Nullable, @NonNull 어노테이션을 엄격하게 해석, 자바 라이브러리 사용 시 null 안전성을 더 강하게 체크]
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.addAll '-Xjsr305=strict'
+//        jvmTarget = "17"
+    }
+}
+
+// 특정 어노테이션이 붙은 클래스를 자동으로 open 으로 만듬 [코틀린으로 만든 코드를 JPA가 인지할수있도록]
+allOpen {
+    annotation 'jakarta.persistence.Entity'
+    annotation 'jakarta.persistence.MappedSuperclass'
+    annotation 'jakarta.persistence.Embeddable'
+}
+
+
 
 test {
     useJUnitPlatform()
