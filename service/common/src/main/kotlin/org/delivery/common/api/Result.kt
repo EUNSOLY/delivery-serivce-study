@@ -1,4 +1,49 @@
 package org.delivery.common.api
 
-class Result {
+import org.delivery.common.error.ErrorCode
+import org.delivery.common.error.ErrorCodeIfs
+
+data class Result (
+    val resultCode:Int?=null,
+    val resultMessage:String?=null,
+    val resultDescription:String?=null,
+
+){
+    // companion : Java로 컴파일했을 때 static과 동일하게 사용가능
+    companion object{
+        fun OK(): Result{
+            return Result(
+                resultCode = ErrorCode.OK.getErrorCode(),
+                resultMessage = ErrorCode.OK.getDescription(),
+                resultDescription = "성공"
+            )
+        }
+
+        fun ERROR(errorCodeIfs: ErrorCodeIfs): Result{
+            return Result(
+                resultCode = errorCodeIfs.getErrorCode(),
+                resultMessage = errorCodeIfs.getDescription(),
+                resultDescription = "에러발생"
+            )
+        }
+
+
+        fun ERROR(errorCodeIfs: ErrorCodeIfs, tx: Throwable): Result{
+            return Result(
+                resultCode = errorCodeIfs.getErrorCode(),
+                resultMessage = errorCodeIfs.getDescription(),
+                resultDescription = tx.localizedMessage
+            )
+        }
+
+
+        fun ERROR(errorCodeIfs: ErrorCodeIfs, description:String): Result{
+            return Result(
+                resultCode = errorCodeIfs.getErrorCode(),
+                resultMessage = errorCodeIfs.getDescription(),
+                resultDescription = description
+            )
+        }
+
+    }
 }
