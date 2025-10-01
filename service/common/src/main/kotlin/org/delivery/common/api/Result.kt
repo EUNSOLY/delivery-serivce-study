@@ -11,6 +11,7 @@ data class Result (
 ){
     // companion : Java로 컴파일했을 때 static과 동일하게 사용가능
     companion object{
+        @JvmStatic
         fun OK(): Result{
             return Result(
                 resultCode = ErrorCode.OK.getErrorCode(),
@@ -18,7 +19,7 @@ data class Result (
                 resultDescription = "성공"
             )
         }
-
+        @JvmStatic
         fun ERROR(errorCodeIfs: ErrorCodeIfs): Result{
             return Result(
                 resultCode = errorCodeIfs.getErrorCode(),
@@ -27,7 +28,7 @@ data class Result (
             )
         }
 
-
+        @JvmStatic
         fun ERROR(errorCodeIfs: ErrorCodeIfs, tx: Throwable): Result{
             return Result(
                 resultCode = errorCodeIfs.getErrorCode(),
@@ -36,7 +37,7 @@ data class Result (
             )
         }
 
-
+        @JvmStatic
         fun ERROR(errorCodeIfs: ErrorCodeIfs, description:String): Result{
             return Result(
                 resultCode = errorCodeIfs.getErrorCode(),

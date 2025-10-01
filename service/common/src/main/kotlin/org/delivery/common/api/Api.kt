@@ -12,13 +12,14 @@ data class Api<T> (
 
     companion object{
 
+        @JvmStatic
         fun<T>OK(body:T?):Api<T>{
             return Api(
                 result = Result.OK(),
                 body=body
             )
         }
-
+        @JvmStatic
         fun<T> ERROR (result: Result):Api<T>{
             return Api(
                 result = result
@@ -26,13 +27,14 @@ data class Api<T> (
             )
         }
 
-        fun<T> ERROR (errorCodeIfs: ErrorCodeIfs,result: Result):Api<T>{
+        @JvmStatic
+        fun<T> ERROR (errorCodeIfs: ErrorCodeIfs):Api<T>{
             return Api(
                 result = Result.ERROR(errorCodeIfs)
 
                 )
         }
-
+        @JvmStatic
         fun<T> ERROR (
             errorCodeIfs: ErrorCodeIfs,
             throwable: Throwable
@@ -43,6 +45,7 @@ data class Api<T> (
             )
         }
 
+        @JvmStatic
         fun<T> ERROR (
             errorCodeIfs: ErrorCodeIfs,
             description:String
