@@ -6,13 +6,15 @@ import org.delivery.db.storemenu.StoreMenuRepository;
 import org.delivery.db.storemenu.enums.StoreMenuStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class StoreMenuService {
     private final StoreMenuRepository storeMenuRepository;
 
     public StoreMenuEntity getStoreMenuWithThrow(Long id){
-        return storeMenuRepository.findFirstByIdAndStatusOrderByIdDesc(id, StoreMenuStatus.REGISTERED)
+        return Optional.ofNullable(storeMenuRepository.findFirstByIdAndStatusOrderByIdDesc(id, StoreMenuStatus.REGISTERED))
                 .orElseThrow(()-> new RuntimeException("메뉴가 존재하지 않습니다."));
     }
 }

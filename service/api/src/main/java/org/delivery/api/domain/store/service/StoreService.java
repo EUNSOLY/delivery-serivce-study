@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.delivery.common.error.ErrorCode;
 import org.delivery.common.exception.ApiException;
 import org.delivery.db.store.StoreEntity;
-import org.delivery.db.store.StoreRepesitory;
+import org.delivery.db.store.StoreRepository;
 import org.delivery.db.store.enums.StoreCategory;
 import org.delivery.db.store.enums.StoreStatus;
 import org.springframework.stereotype.Service;
@@ -15,11 +15,11 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class StoreService {
-    private final StoreRepesitory storeRepesitory;
+    private final StoreRepository storeRepesitory;
 
     // 유요한 스토어 가져오기
     public StoreEntity getStoreWithThrow(Long id){
-        var entity = storeRepesitory.findFirstByIdAndStatusOrderByIdDesc(id, StoreStatus.REGISTERED);
+        var entity = Optional.ofNullable(storeRepesitory.findFirstByIdAndStatusOrderByIdDesc(id, StoreStatus.REGISTERED));
         return entity.orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
     }
 

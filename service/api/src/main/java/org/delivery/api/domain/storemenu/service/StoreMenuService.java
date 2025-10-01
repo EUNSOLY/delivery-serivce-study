@@ -30,7 +30,7 @@ public class StoreMenuService {
 
     // 메뉴 가져오기
     public StoreMenuEntity getStoreMenuWithThrow(Long id){
-        var entity = storeMenuRepository.findFirstByIdAndStatusOrderByIdDesc(id,StoreMenuStatus.REGISTERED);
+        var entity = Optional.ofNullable(storeMenuRepository.findFirstByIdAndStatusOrderByIdDesc(id,StoreMenuStatus.REGISTERED));
         return entity.orElseThrow(()->new ApiException(ErrorCode.NULL_POINT));
     }
 
