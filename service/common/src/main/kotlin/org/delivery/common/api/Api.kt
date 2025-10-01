@@ -6,7 +6,7 @@ import org.delivery.common.error.ErrorCodeIfs
 data class Api<T> (
     var result: Result?=null,
 
-
+    @field:Valid
     var body : T? = null
 ){
 

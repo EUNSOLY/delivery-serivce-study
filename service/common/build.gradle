@@ -38,6 +38,15 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation platform('org.junit:junit-bom:5.10.0')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+
+    // validation
+    implementation group: 'jakarta.validation', name: 'jakarta.validation-api', version: '3.0.2'
+
+    // 커스텀 어노테이션을 만들기위해 @Service, @AliasFor만 사용하기위해 특정 패키지만 적용
+    // Service
+    implementation group: 'org.springframework', name: 'spring-context', version: '6.2.10'
+    // aliasFor
+    implementation group: 'org.springframework', name: 'spring-core', version: '6.2.11'
 }
 
 test {
