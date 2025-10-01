@@ -25,6 +25,7 @@ import org.delivery.db.userordermenu.enums.UserOrderMenuState;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/*
 @Business
 @RequiredArgsConstructor
 @Slf4j
@@ -95,13 +96,15 @@ public class UserOrderBusiness {
                 // 주문 1건씩 처리
                 .map(userOrderEntity->{
                     log.info("사용자의 주문 정보 : {}", userOrderEntity);
-          /*          try {
+          */
+/*          try {
                         var jsonString = objectMapper.writeValueAsString(userOrderEntity);
                         log.info("Json String : {}", jsonString);
 
                     }catch (Exception e){
                         log.error("",e);
-                    }*/
+                    }*//*
+
 
                     // 사용자가 주문한 메뉴 리스트
                     // 기존 : var userOrderMenuEntityList = userOrderMenuService.getUserOrderMenu(it.getId());
@@ -112,10 +115,12 @@ public class UserOrderBusiness {
 
                     // 어떠한 메뉴를 주문했는지
 
-                    /* var storeMenuEntityList = userOrderMenuEntityList.stream()
+                    */
+/* var storeMenuEntityList = userOrderMenuEntityList.stream()
                             .map(userOrdermenuEntity->{
                                 return storeMenuService.getStoreMenuWithThrow(userOrdermenuEntity.getStoreMenu().getId());
-                            }).toList();*/
+                            }).toList();*//*
+
 
                     // 연관관계 설정 후 리펙토링
                     var storeMenuEntityList = userOrderMenuEntityList.stream()
@@ -189,3 +194,4 @@ public class UserOrderBusiness {
                 .build();
     }
 }
+*/
