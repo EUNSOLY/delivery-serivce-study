@@ -1,8 +1,8 @@
 package org.delivery.api.domain.user.service;
 
 import lombok.RequiredArgsConstructor;
-import org.delivery.api.common.error.ErrorCode;
-import org.delivery.api.common.error.UserErrorCode;
+import org.delivery.common.error.ErrorCode;
+import org.delivery.common.error.UserErrorCode;
 import org.delivery.api.common.exception.ApiException;
 import org.delivery.db.user.UserEntity;
 import org.delivery.db.user.UserRepository;
@@ -51,7 +51,7 @@ public class UserService {
                         password,
                         UserStatus.REGISTERED
                 )
-                .orElseThrow(() -> new ApiException(UserErrorCode.USER_NOT_FOUNDK, "유저가 존재하지 않습니다"));
+                .orElseThrow(() -> new ApiException(UserErrorCode.USER_NOT_FOUND, "유저가 존재하지 않습니다"));
 
     }
 
@@ -60,6 +60,6 @@ public class UserService {
                         userId,
                         UserStatus.REGISTERED
                 )
-                .orElseThrow(() -> new ApiException(UserErrorCode.USER_NOT_FOUNDK, "유저가 존재하지 않습니다"));
+                .orElseThrow(() -> new ApiException(UserErrorCode.USER_NOT_FOUND, "유저가 존재하지 않습니다"));
     }
 }

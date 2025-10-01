@@ -1,10 +1,10 @@
 package org.delivery.api.common.exception;
 
-import org.delivery.api.common.error.ErrorCodeInterface;
+import org.delivery.common.error.ErrorCodeIfs;
 
 public interface ApiExceptionInterface {
 
-    ErrorCodeInterface getErrorCodeInterface();
+    ErrorCodeIfs getErrorCodeIfs();
 
     String getErrorDescription();
 }

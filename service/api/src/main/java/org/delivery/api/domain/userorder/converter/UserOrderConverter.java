@@ -2,19 +2,13 @@ package org.delivery.api.domain.userorder.converter;
 
 import lombok.RequiredArgsConstructor;
 import org.delivery.api.common.annotation.Converter;
-import org.delivery.api.common.error.ErrorCode;
-import org.delivery.api.common.exception.ApiException;
-import org.delivery.api.domain.store.controller.model.StoreRegisterRequest;
-import org.delivery.api.domain.store.controller.model.StoreResponse;
 import org.delivery.api.domain.user.model.User;
 import org.delivery.api.domain.userorder.controller.model.UserOrderResponse;
-import org.delivery.db.store.StoreEntity;
 import org.delivery.db.storemenu.StoreMenuEntity;
 import org.delivery.db.userorder.UserOrderEntity;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Converter
 @RequiredArgsConstructor

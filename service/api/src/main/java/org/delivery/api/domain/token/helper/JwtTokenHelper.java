@@ -6,7 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
-import org.delivery.api.common.error.TokenErrorCode;
+import org.delivery.common.error.TokenErrorCode;
 import org.delivery.api.common.exception.ApiException;
 import org.delivery.api.domain.token.ifs.TokenHelperInterface;
 import org.delivery.api.domain.token.model.TokenDto;
