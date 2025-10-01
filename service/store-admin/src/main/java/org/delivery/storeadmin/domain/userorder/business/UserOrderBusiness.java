@@ -61,7 +61,7 @@ public class UserOrderBusiness {
         // 4. response 형태에 맞게 변환
         var storeMenuResponseList = userOrderMenuList.stream()
                 .map(userOrderMenuEntity -> {
-                    return storeMenuService.getStoreMenuWithThrow(userOrderMenuEntity.getStoreMenuId());
+                    return storeMenuService.getStoreMenuWithThrow(userOrderMenuEntity.getStoreMenu().getId());
                 }).map(storeMenuConverter::toResponse).toList();
 
         // 5. userOrderEntity를 Response에 맞게 변환
@@ -77,7 +77,7 @@ public class UserOrderBusiness {
 
 
         // 가게와 연결되어있는 (큐에 들어있는)커넥션 찾아오기
-        var userConnection = sseConnectionPool.getSession(userOrderEntity.getStoreId().toString());
+        var userConnection = sseConnectionPool.getSession(userOrderEntity.getStore().getId().toString());
         System.out.println(sseConnectionPool);
         System.out.println(userConnection + ">>>>>>>>>>");
         userConnection.sendMessage(pushResponse);
