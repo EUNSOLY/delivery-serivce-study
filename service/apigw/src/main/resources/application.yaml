@@ -1,2 +1,16 @@
 server:
   port: 9090
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: public-service-api # 이름
+              uri: http://localhost:8080 # 라우팅 주소[api 서버 주소]
+              predicates: # 어떤 요청이 왔을때 위의 uri로 보낼 것인가 [키워드 : service-spi]
+                - Path=/service-api/open-api/**
+              filters: # 요청 주소에서 (앞주소를 지워준다 즉 /service-api 제거
+                - RewritePath=/service-api(?<segment>/?.*), $\{segment}
+                - ServiceApiPublicFilter # filters랑 매칭할 class명
