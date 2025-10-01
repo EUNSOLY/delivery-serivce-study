@@ -10,6 +10,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
+/*
 @Configuration
 @RequiredArgsConstructor // Bean 주입
 public class WebConfig implements WebMvcConfigurer {
@@ -56,3 +57,4 @@ public class WebConfig implements WebMvcConfigurer {
         resolvers.add(userSessionResolver);
     }
 }
+*/
