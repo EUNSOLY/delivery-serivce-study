@@ -2,7 +2,7 @@ package org.delivery.api.domain.store.business;
 
 import lombok.RequiredArgsConstructor;
 import org.delivery.api.common.annotation.Business;
-import org.delivery.api.common.api.Api;
+import org.delivery.common.api.Api;
 import org.delivery.api.domain.store.controller.model.StoreRegisterRequest;
 import org.delivery.api.domain.store.controller.model.StoreResponse;
 import org.delivery.api.domain.store.converter.StoreConverter;

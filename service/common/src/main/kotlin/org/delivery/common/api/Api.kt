@@ -11,6 +11,7 @@ data class Api<T> (
 ){
 
     companion object{
+
         fun<T>OK(body:T?):Api<T>{
             return Api(
                 result = Result.OK(),
