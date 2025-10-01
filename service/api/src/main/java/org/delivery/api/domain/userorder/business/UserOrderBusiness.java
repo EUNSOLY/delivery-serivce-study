@@ -37,6 +37,8 @@ public class UserOrderBusiness {
 
 
     private final UserOrderProducer userOrderProducer;
+
+
     // 1. 사용자, 메뉴 id
     // 2. userOrder 생성
     // 3. userOrderMenu 생성
@@ -46,6 +48,7 @@ public class UserOrderBusiness {
             User user,
             UserOrderRequest body
     ) {
+        var storeEntity = storeService.getStoreWithThrow(body.getStoreId());
 
         var storeMenuEntityList = body.getStoreMenuIdList()
                 .stream()
@@ -54,7 +57,7 @@ public class UserOrderBusiness {
 
         var userOrderEntity = userOrderConverter.toEntity(
                 user,
-                body.getStoreId(),
+                storeEntity,
                 storeMenuEntityList);
 
         //주문
@@ -78,6 +81,7 @@ public class UserOrderBusiness {
         return  userOrderConverter.toResponse(newUserOrderEntity);
     }
 
+
     public List<UserOrderDetailResponse> current(User user) {
         // 현재 사용자가 주문한 내역
         var userOrderEntityList = userOrderService.current(user.getId());
@@ -92,13 +96,13 @@ public class UserOrderBusiness {
                     // 어떠한 메뉴를 주문했는지
                     var storeMenuEntityList = userOrderMenuEntityList.stream()
                             .map(userOrdermenuEntity->{
-                                return storeMenuService.getStoreMenuWithThrow(userOrdermenuEntity.getStoreMenuId());
+                                return storeMenuService.getStoreMenuWithThrow(userOrdermenuEntity.getStoreMenu().getId());
 
                             }).toList();
 
                     // 사용자가 주문한 가게
                     // TODO 리팩토링 필요
-                    var storeEntity = storeService.getStoreWithThrow(storeMenuEntityList.stream().findFirst().get().getStoreId());
+                    var storeEntity = storeService.getStoreWithThrow(storeMenuEntityList.stream().findFirst().get().getStore().getId());
                     return UserOrderDetailResponse.builder()
                             .userOrderResponse(userOrderConverter.toResponse(it))
                             .storeMenuResponseList(storeMenuConverter.toResponse(storeMenuEntityList))
@@ -125,13 +129,13 @@ public class UserOrderBusiness {
                     // 어떠한 메뉴를 주문했는지
                     var storeMenuEntityList = userOrderMenuEntityList.stream()
                             .map(userOrdermenuEntity->{
-                                return storeMenuService.getStoreMenuWithThrow(userOrdermenuEntity.getStoreMenuId());
+                                return storeMenuService.getStoreMenuWithThrow(userOrdermenuEntity.getStoreMenu().getId());
 
                             }).toList();
 
                     // TODO 리팩토링 필요
                     // 사용자가 주문한 가게
-                    var storeEntity = storeService.getStoreWithThrow(storeMenuEntityList.stream().findFirst().get().getStoreId());
+                    var storeEntity = storeService.getStoreWithThrow(storeMenuEntityList.stream().findFirst().get().getStore().getId());
                     return UserOrderDetailResponse.builder()
                             .userOrderResponse(userOrderConverter.toResponse(it))
                             .storeMenuResponseList(storeMenuConverter.toResponse(storeMenuEntityList))
@@ -152,12 +156,12 @@ public class UserOrderBusiness {
         // 어떠한 메뉴를 주문했는지
         var storeMenuEntityList = userOrderMenuEntityList.stream()
                 .map(userOrdermenuEntity->{
-                    return storeMenuService.getStoreMenuWithThrow(userOrdermenuEntity.getStoreMenuId());
+                    return storeMenuService.getStoreMenuWithThrow(userOrdermenuEntity.getStoreMenu().getId());
 
                 }).toList();
         // TODO 리팩토링 필요
         // 사용자가 주문한 가게
-        var storeEntity = storeService.getStoreWithThrow(storeMenuEntityList.stream().findFirst().get().getStoreId());
+        var storeEntity = storeService.getStoreWithThrow(storeMenuEntityList.stream().findFirst().get().getStore().getId());
 
         return UserOrderDetailResponse.builder()
                 .userOrderResponse(userOrderConverter.toResponse(userOrderEntity))
