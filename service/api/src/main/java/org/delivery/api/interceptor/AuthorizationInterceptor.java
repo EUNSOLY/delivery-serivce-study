@@ -30,31 +30,39 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
         log.info("Authorization Interceptor url : {}", request.getRequestURI());
 
         //Web, chrome의 경우 GET, POST 전 OPTIONS를 호출하여 해당 메서드를 지원하는지 체크하는 API가 존재하기에 이 API 통과시키기 필요
-        if(HttpMethod.OPTIONS.matches(request.getMethod())){
+        if (HttpMethod.OPTIONS.matches(request.getMethod())) {
             return true;
         }
 
         // 리소스 검증(API요청이 아닌 JS, HTML, PNG 등을 받아가는 요청이라면 통과)
-        if(handler instanceof ResourceHttpRequestHandler){
+        if (handler instanceof ResourceHttpRequestHandler) {
             return true;
         }
 
-        // header 토큰 검증
-        var accessToken = request.getHeader("authorization-token");
+        // header 토큰 검증[GW에서 검증 진행으로 검증 불필요]
+        /*var accessToken = request.getHeader("authorization-token");
         if(accessToken ==null){
             throw new ApiException(TokenErrorCode.AUTHORIZATION_TOKEN_NOT_FOUND);
         }
-
         var userId =  tokenBusiness.validationAccessToken(accessToken);
-
         if(userId !=null){
-            // 한가지 요청에 대해서 유효한값을 글로벌하게 저장할 수있는 저장소에 저장
-            var requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
-            requestContext.setAttribute("userId",userId, RequestAttributes.SCOPE_REQUEST);
-            return true;
+         // 한가지 요청에 대해서 유효한값을 글로벌하게 저장할 수있는 저장소에 저장
+         var requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
+         requestContext.setAttribute("userId",userId, RequestAttributes.SCOPE_REQUEST);
+         return true;
+        }
+        throw new ApiException(ErrorCode.BAD_REQUEST, "인증실패");
+        */
+
+        var userId = request.getHeader("x-user-id");
+
+        if (userId == null) {
+            throw new ApiException(ErrorCode.BAD_REQUEST, "x-user= -id header 없음");
         }
 
-        throw new ApiException(ErrorCode.BAD_REQUEST,"인증실패");
+        var requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
+        requestContext.setAttribute("userId",userId, RequestAttributes.SCOPE_REQUEST);
 
+        return true;
     }
 }

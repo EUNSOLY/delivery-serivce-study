@@ -36,7 +36,7 @@ public class UserSessionResolver implements HandlerMethodArgumentResolver {
         // request context holder에서 찾아오기
         var requestContext = RequestContextHolder.getRequestAttributes();
         var userId = requestContext.getAttribute("userId", RequestAttributes.SCOPE_REQUEST);
-
+        // TODO userEntity 정보가 account 쪽으로 전부 넘어가야한다. [Header에 들어있는 값을 기준으로 하단 정보를 셋팅해주는 부분이 필요]
         var userEntity = userService.getUserWithThrow(Long.parseLong(userId.toString()));
 
         // 사용자 정보 셋팅
