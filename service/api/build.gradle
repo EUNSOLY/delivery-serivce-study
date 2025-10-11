@@ -60,6 +60,9 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
 
+    // logstash
+    implementation 'net.logstash.logback:logstash-logback-encoder:7.3'
+
 }
 // Kotlin 컴파일러 옵션 설정 [Java의 @Nullable, @NonNull 어노테이션을 엄격하게 해석, 자바 라이브러리 사용 시 null 안전성을 더 강하게 체크]
 kotlin {
